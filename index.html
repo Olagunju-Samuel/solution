@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NSU — Student Dropout & Retention System</title>
+  <link rel="icon" href="assets/nsu-logo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-screen="login">
+  <div class="sidebar-backdrop" id="sidebar-backdrop" aria-hidden="true"></div>
+
+  <section id="login" class="screen screen--login is-active">
+    <div class="login">
+      <div class="login__brand">
+        <div class="brand brand--hero">
+          <img class="brand__img brand__img--lg" src="assets/nsu-logo.png" alt="Nasarawa State University logo" />
+          <div class="brand__text">
+            <span class="brand__uni">Nasarawa State University</span>
+            <span class="brand__motto">Knowledge for Development</span>
+          </div>
+        </div>
+        <h1 class="login__title">Student Retention System</h1>
+        <p class="login__subtitle">Dropout prediction &amp; student success platform</p>
+        <h2 class="login__headline">Building better futures, one student at a time</h2>
+        <p class="login__desc">AI-powered insights to predict, prevent, and reduce student dropout across NSU.</p>
+      </div>
+      <div class="login__form-panel">
+        <div class="auth-tabs">
+          <button type="button" class="auth-tabs__btn auth-tabs__btn--active" data-auth-tab="register">Create account</button>
+        </div>
+        <p class="login__role-label">Select your role</p>
+        <div class="role-cards">
+          <button type="button" class="role-card role-card--student role-card--active" data-role="student">
+            <span class="role-card__icon">STU</span>
+            <span>Student</span>
+          </button>
+          <button type="button" class="role-card role-card--lecturer" data-role="lecturer">
+            <span class="role-card__icon">LEC</span>
+            <span>Lecturer</span>
+          </button>
+          <button type="button" class="role-card role-card--admin" data-role="admin" data-auth-hide-register>
+            <span class="role-card__icon">ADM</span>
+            <span>Admin</span>
+          </button>
+        </div>
+        <p id="auth-message" class="auth-message" role="alert" hidden></p>
+        <form id="login-form" class="login__form auth-panel auth-panel--active" data-auth-panel="login">
+          <h2>Welcome back</h2>
+          <p class="login__form-sub">Sign in to your account</p>
+          <label>Email
+            <input type="email" name="email" placeholder="you@nsu.edu.ng" autocomplete="username" required />
+          </label>
+          <label>Password
+            <span class="password-wrap">
+              <input type="password" name="password" placeholder="Enter your password" autocomplete="current-password" required />
+              <button type="button" class="password-toggle" aria-label="Show password">Show</button>
+            </span>
+          </label>
+          <button type="submit" class="btn btn--primary btn--full">Sign in</button>
+          <p class="login__hint">Demo: student@nsu.edu.ng / student1</p>
+        </form>
+        <form id="register-form" class="login__form auth-panel" data-auth-panel="register" hidden>
+          <h2>Create account</h2>
+          <p class="login__form-sub">Register as a student or lecturer</p>
+          <label>Full name
+            <input type="text" name="fullName" required />
+          </label>
+          <label id="register-id-label">Student ID
+            <input type="text" name="idNumber" placeholder="NSU/2024/0001" required />
+          </label>
+          <label>Department
+            <input type="text" name="department" placeholder="Faculty / Department" />
+          </label>
+          <label>Email
+            <input type="email" name="email" required />
+          </label>
+          <label>Password
+            <input type="password" name="password" minlength="6" required />
+          </label>
+          <label>Confirm password
+            <input type="password" name="confirmPassword" minlength="6" required />
+          </label>
+          <button type="submit" class="btn btn--primary btn--full">Create account</button>
+        </form>
+        <p class="login__footer">Students &amp; lecturers can register. Admins: contact IT.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="student" class="screen">
+    <div class="dashboard dashboard--student">
+      <aside class="sidebar sidebar--blue" data-sidebar>
+        <div class="sidebar__brand brand">
+          <img class="brand__img" src="assets/nsu-logo.png" alt="" />
+          <div class="brand__text">
+            <strong>NSU Retention</strong>
+            <small>Student portal</small>
+          </div>
+        </div>
+        <nav class="sidebar__nav" data-portal-nav="student">
+          <a href="#" data-page="dashboard" class="active">Dashboard</a>
+          <a href="#" data-page="profile">My Profile</a>
+          <a href="#" data-page="attendance">My Attendance</a>
+          <a href="#" data-page="performance">My Performance</a>
+          <a href="#" data-page="alerts">Alerts &amp; Messages <span class="badge" data-student-alerts>2</span></a>
+          <a href="#" data-page="resources">Resources</a>
+          <a href="#" data-page="support">Support</a>
+          <a href="#login" class="sidebar__logout">Sign out</a>
+        </nav>
+      </aside>
+      <div class="dashboard__main">
+        <header class="topbar">
+          <button type="button" class="topbar__menu" data-menu-toggle aria-label="Open menu">☰</button>
+          <div class="topbar__brand">
+            <img src="assets/nsu-logo.png" alt="" />
+            <span>NSU Retention</span>
+          </div>
+          <div class="topbar__right">
+            <button type="button" class="btn-icon btn-icon--bell" aria-label="Notifications"></button>
+            <div class="user-chip">
+              <span class="avatar" data-user-initials>JD</span>
+              <div>
+                <strong data-user-name>Student</strong>
+                <small>Student</small>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div class="content" data-portal="student">
+          <section class="portal-page portal-page--active" data-page="dashboard">
+          <div class="content__header-row">
+            <div>
+              <h1 data-welcome-title>Welcome back</h1>
+              <p class="muted">Stay focused and keep up the great work this term.</p>
+            </div>
+            <div class="risk-card risk-card--low">
+              <span class="risk-card__icon">OK</span>
+              <div>
+                <small>Dropout risk status</small>
+                <strong>Low risk</strong>
+                <p>You are on track. Keep attending classes regularly.</p>
+              </div>
+            </div>
+          </div>
+          <div class="metrics metrics--4">
+            <div class="metric-card">
+              <div class="metric-card__top">
+                <span class="metric-icon metric-icon--blue">ATT</span>
+                <div>
+                  <small>Attendance</small>
+                  <strong data-stat-attendance>92%</strong>
+                  <span class="muted">This term</span>
+                </div>
+              </div>
+              <div class="chart-wrap chart-wrap--spark"><canvas id="spark-attendance" width="280" height="48"></canvas></div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-card__top">
+                <span class="metric-icon metric-icon--green">GPA</span>
+                <div>
+                  <small>Grade point average</small>
+                  <strong data-stat-gpa>3.45</strong>
+                  <span class="muted">This term</span>
+                </div>
+              </div>
+              <div class="chart-wrap chart-wrap--spark"><canvas id="spark-gpa" width="280" height="48"></canvas></div>
+            </div>
+            <div class="metric-card metric-card--compact">
+              <span class="metric-icon metric-icon--purple">CRS</span>
+              <div>
+                <small>Courses</small>
+                <strong data-stat-courses>5</strong>
+                <span class="muted">Enrolled</span>
+              </div>
+            </div>
+            <div class="metric-card metric-card--compact">
+              <span class="metric-icon metric-icon--orange">ALT</span>
+              <div>
+                <small>Alerts</small>
+                <strong data-student-alerts>2</strong>
+                <span class="muted">Unread</span>
+              </div>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="card">
+              <h3>Attendance overview</h3>
+              <div class="chart-wrap"><canvas id="chart-student-attendance"></canvas></div>
+            </div>
+            <div class="card">
+              <h3>Recent alerts</h3>
+              <ul class="alert-list">
+                <li><span class="dot dot--green"></span> Risk level changed to low <time>2h ago</time></li>
+                <li><span class="dot dot--orange"></span> Missed 2 classes this week <time>1d ago</time></li>
+                <li><span class="dot dot--green"></span> Assignment submitted on time <time>2d ago</time></li>
+              </ul>
+            </div>
+          </div>
+          <div class="banner banner--blue">
+            <div>
+              <strong>Recommended for you</strong>
+              <p>Study guides and tutoring sessions matched to your enrolled courses.</p>
+            </div>
+            <button type="button" class="banner__action" data-goto-page="resources">Browse resources</button>
+          </div>
+          </section>
+
+          <section class="portal-page" data-page="profile">
+            <h1>My Profile</h1>
+            <p class="muted">Your registered account information</p>
+            <div class="card profile-card">
+              <div class="profile-card__header">
+                <span class="avatar avatar--lg" data-user-initials>?</span>
+                <div>
+                  <h2 data-user-name>—</h2>
+                  <p class="muted" data-user-role>Student</p>
+                </div>
+              </div>
+              <dl class="profile-dl">
+                <div><dt>Email</dt><dd data-profile-email>—</dd></div>
+                <div><dt>Student ID</dt><dd data-profile-id>—</dd></div>
+                <div><dt>Department</dt><dd data-profile-dept>—</dd></div>
+                <div><dt>Dropout risk</dt><dd data-profile-risk>Low risk</dd></div>
+              </dl>
+            </div>
+          </section>
+
+          <section class="portal-page" data-page="attendance">
+            <h1>My Attendance</h1>
+            <p class="muted">Your class attendance this term</p>
+            <div class="metrics metrics--4">
+              <div class="metric-card metric-card--compact">
+                <span class="metric-icon metric-icon--blue">ATT</span>
+                <div><small>Overall</small><strong data-stat-attendance>92%</strong></div>
+              </div>
+            </div>
+            <div class="card">
+              <h3>Monthly attendance</h3>
+              <div class="chart-wrap"><canvas id="chart-student-attendance-page"></canvas></div>
+            </div>
+            <div class="card">
+              <h3>Recent sessions</h3>
+              <ul class="alert-list" id="student-attendance-list"></ul>
+            </div>
+          </section>
+
+          <section class="portal-page" data-page="performance">
+            <h1>My Performance</h1>
+            <p class="muted">Grades and academic progress</p>
+            <div class="metrics metrics--4">
+              <div class="metric-card metric-card--compact">
+                <span class="metric-icon metric-icon--green">GPA</span>
+                <div><small>GPA</small><strong data-stat-gpa>3.45</strong></div>
+              </div>
+              <div class="metric-card metric-card--compact">
+                <span class="metric-icon metric-icon--purple">CRS</span>
+                <div><small>Courses</small><strong data-stat-courses>5</strong></div>
+              </div>
+            </div>
+            <div class="card">
+              <h3>Course grades</h3>
+              <table class="risk-table">
+                <thead><tr><th>Course</th><th>Grade</th><th>Status</th></tr></thead>
+                <tbody id="student-grades-list"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="portal-page" data-page="alerts">
+            <h1>Alerts &amp; Messages</h1>
+            <p class="muted">Notifications from lecturers and the system</p>
+            <div class="card">
+              <ul class="alert-list" id="student-alerts-list"></ul>
+            </div>
+          </section>
+
+          <section class="portal-page" data-page="resources">
+            <h1>Resources</h1>
+            <p class="muted">Study materials and support services</p>
+            <div class="grid-2">
+              <div class="card resource-card"><h3>Library portal</h3><p>Access e-books and journals.</p><a href="#">Open library →</a></div>
+              <div class="card resource-card"><h3>Tutoring centre</h3><p>Book one-on-one sessions.</p><a href="#">Book session →</a></div>
+              <div class="card resource-card"><h3>Career services</h3><p>CV review and placements.</p><a href="#">Learn more →</a></div>
+              <div class="card resource-card"><h3>Past questions</h3><p>Download course materials.</p><a href="#">Browse files →</a></div>
+            </div>
+          </section>
+
+          <section class="portal-page" data-page="support">
+            <h1>Support</h1>
+            <p class="muted">Get help from student services</p>
+            <div class="card">
+              <h3>Contact support</h3>
+              <p>Email: <a href="mailto:support@nsu.edu.ng">support@nsu.edu.ng</a></p>
+              <p>Phone: +234 (0) 123 456 7890</p>
+              <p>Office hours: Mon–Fri, 8:00 AM – 4:00 PM</p>
+            </div>
+            <div class="card">
+              <h3>Send a message</h3>
+              <form id="support-form" class="login__form" style="max-width:480px">
+                <label>Subject<input type="text" name="subject" required /></label>
+                <label>Message<textarea name="message" rows="4" required></textarea></label>
+                <button type="submit" class="btn btn--primary">Submit ticket</button>
+              </form>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lecturer" class="screen">
+    <div class="lecturer-topbar">
+      <img src="assets/nsu-logo.png" alt="" class="lecturer-topbar__logo" />
+      <span>NSU Retention — Lecturer portal</span>
+    </div>
+    <div class="dashboard dashboard--lecturer">
+      <aside class="sidebar sidebar--green" data-sidebar>
+        <div class="sidebar__brand brand">
+          <img class="brand__img" src="assets/nsu-logo.png" alt="" />
+          <div class="brand__text">
+            <strong>NSU Retention</strong>
+            <small>Lecturer portal</small>
+          </div>
+        </div>
+        <nav class="sidebar__nav" data-portal-nav="lecturer">
+          <a href="#" data-page="dashboard" class="active">Dashboard</a>
+          <a href="#" data-page="profile">My Profile</a>
+          <a href="#" data-page="classes">My Classes</a>
+          <a href="#" data-page="attendance">Attendance</a>
+          <a href="#" data-page="performance">Performance</a>
+          <a href="#" data-page="at-risk">At-risk Students <span class="badge">18</span></a>
+          <a href="#" data-page="messages">Messages</a>
+          <a href="#login" class="sidebar__logout">Sign out</a>
+        </nav>
+      </aside>
+      <div class="dashboard__main">
+        <header class="topbar">
+          <button type="button" class="topbar__menu" data-menu-toggle aria-label="Open menu">☰</button>
+          <div class="topbar__brand">
+            <img src="assets/nsu-logo.png" alt="" />
+            <span>NSU Retention</span>
+          </div>
+          <div class="topbar__right">
+            <button type="button" class="btn-icon btn-icon--bell" aria-label="Notifications"></button>
+            <div class="user-chip">
+              <span class="avatar avatar--green" data-user-initials>DR</span>
+              <div>
+                <strong data-user-name>Lecturer</strong>
+                <small>Lecturer</small>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div class="content" data-portal="lecturer">
+          <section class="portal-page portal-page--active" data-page="dashboard">
+          <h1 data-welcome-title>Lecturer dashboard</h1>
+          <p class="muted">Overview of your classes and student performance.</p>
+          <div class="metrics metrics--4">
+            <div class="metric-card metric-card--compact">
+              <span class="metric-icon metric-icon--blue">CLS</span>
+              <div><small>Total classes</small><strong>4</strong></div>
+            </div>
+            <div class="metric-card metric-card--compact">
+              <span class="metric-icon metric-icon--green">STU</span>
+              <div><small>Total students</small><strong>128</strong></div>
+            </div>
+            <div class="metric-card metric-card--compact">
+              <span class="metric-icon metric-icon--orange">RISK</span>
+              <div><small>At-risk students</small><strong>18</strong></div>
+            </div>
+            <div class="metric-card metric-card--compact">
+              <span class="metric-icon metric-icon--purple">ATT</span>
+              <div><small>Attendance average</small><strong>86%</strong></div>
+            </div>
+          </div>
+          <div class="grid-2 grid-2--lecturer">
+            <div class="card">
+              <h3>At-risk students</h3>
+              <div style="overflow-x:auto">
+                <table class="risk-table">
+                  <thead><tr><th>Name</th><th>Student ID</th><th>Risk level</th></tr></thead>
+                  <tbody>
+                    <tr><td>Sarah Johnson</td><td>STU-1042</td><td><span class="tag tag--high">High</span></td></tr>
+                    <tr><td>Michael Chen</td><td>STU-1087</td><td><span class="tag tag--medium">Medium</span></td></tr>
+                    <tr><td>Emily Davis</td><td>STU-1123</td><td><span class="tag tag--low">Low</span></td></tr>
+                    <tr><td>James Wilson</td><td>STU-1156</td><td><span class="tag tag--high">High</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <h3>Class attendance</h3>
+              <div class="donut-wrap chart-wrap">
+                <canvas id="chart-lecturer-donut"></canvas>
+                <div class="donut-center"><strong>86%</strong><small>Average</small></div>
+              </div>
+              <div class="legend legend--inline">
+                <span><i class="dot dot--green"></i> Present 86%</span>
+                <span><i class="dot dot--red"></i> Absent 10%</span>
+                <span><i class="dot dot--orange"></i> Late 4%</span>
+              </div>
+            </div>
+            <div class="card">
+              <h3>Recent messages</h3>
+              <div class="message-item">
+                <span class="avatar avatar--sm avatar--gold">AU</span>
+                <div>
+                  <strong>System administrator</strong>
+                  <p>Please submit attendance reports by Friday, 5:00 PM.</p>
+                  <time>3 hours ago</time>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <h3>Quick actions</h3>
+              <div class="action-btns">
+                <button type="button" class="btn btn--green">Mark attendance</button>
+                <button type="button" class="btn btn--primary">Generate report</button>
+              </div>
+            </div>
+          </div>
+          </section>
+          <section class="portal-page" data-page="profile"><h1>My Profile</h1><div class="card profile-card"><div class="profile-card__header"><span class="avatar avatar--lg avatar--green" data-user-initials>?</span><div><h2 data-user-name>—</h2></div></div><dl class="profile-dl"><div><dt>Email</dt><dd data-profile-email>—</dd></div><div><dt>Staff ID</dt><dd data-profile-id>—</dd></div><div><dt>Department</dt><dd data-profile-dept>—</dd></div></dl></div></section>
+          <section class="portal-page" data-page="classes"><h1>My Classes</h1><div class="card" id="lecturer-classes-list"></div></section>
+          <section class="portal-page" data-page="attendance"><h1>Attendance</h1><div class="card"><p>Record class attendance.</p></div></section>
+          <section class="portal-page" data-page="performance"><h1>Performance</h1><div class="card"><p>Class GPA average: 3.2</p></div></section>
+          <section class="portal-page" data-page="at-risk"><h1>At-risk Students</h1><div class="card"><table class="risk-table"><tr><td>Sarah Johnson</td><td><span class="tag tag--high">High</span></td></tr></table></div></section>
+          <section class="portal-page" data-page="messages"><h1>Messages</h1><div class="card"><p>Administrator: Submit reports by Friday.</p></div></section>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="admin" class="screen">
+    <div class="dashboard dashboard--admin">
+      <aside class="sidebar sidebar--gold" data-sidebar>
+        <div class="sidebar__brand brand">
+          <img class="brand__img" src="assets/nsu-logo.png" alt="" />
+          <div class="brand__text">
+            <strong>NSU Retention</strong>
+            <small>Administration</small>
+          </div>
+        </div>
+        <nav class="sidebar__nav">
+          <a href="#" class="active">Dashboard</a>
+          <a href="#">Schools</a>
+          <a href="#">Students</a>
+          <a href="#">Lecturers</a>
+          <a href="#">Analytics</a>
+          <a href="#">Dropout prediction</a>
+          <a href="#">Reports</a>
+          <a href="#">System settings</a>
+          <a href="#login" class="sidebar__logout">Sign out</a>
+        </nav>
+      </aside>
+      <div class="dashboard__main">
+        <header class="topbar">
+          <button type="button" class="topbar__menu" data-menu-toggle aria-label="Open menu">☰</button>
+          <div class="topbar__brand">
+            <img src="assets/nsu-logo.png" alt="" />
+            <span>NSU Retention</span>
+          </div>
+          <div class="topbar__right">
+            <button type="button" class="btn-icon btn-icon--bell" aria-label="Notifications"></button>
+            <div class="user-chip">
+              <span class="avatar avatar--gold">AU</span>
+              <div>
+                <strong>Admin User</strong>
+                <small>Administrator</small>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div class="content">
+          <h1>Admin dashboard</h1>
+          <p class="muted">System-wide overview and analytics across all institutions.</p>
+          <div class="metrics metrics--4">
+            <div class="metric-card metric-card--compact">
+              <span class="metric-icon metric-icon--blue">STU</span>
+              <div><small>Total students</small><strong>8,542</strong></div>
+            </div>
+            <div class="metric-card metric-card--compact">
+              <span class="metric-icon metric-icon--green">SCH</span>
+              <div><small>Total schools</small><strong>46</strong></div>
+            </div>
+            <div class="metric-card metric-card--compact">
+              <span class="metric-icon metric-icon--orange">RISK</span>
+              <div><small>At-risk students</small><strong>1,245</strong></div>
+            </div>
+            <div class="metric-card metric-card--compact">
+              <span class="metric-icon metric-icon--red">DRP</span>
+              <div><small>Dropout rate</small><strong>14.6%</strong></div>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="card">
+              <h3>Dropout risk by region</h3>
+              <div class="map-card">
+                <svg class="nigeria-map" viewBox="0 0 200 220" aria-label="Nigeria regional risk map">
+                  <path class="region region--low" d="M80 20 L120 25 L130 50 L110 70 L90 65 Z"/>
+                  <path class="region region--medium" d="M50 60 L90 55 L100 90 L70 100 L45 85 Z"/>
+                  <path class="region region--high" d="M100 95 L150 85 L160 130 L120 150 L95 130 Z"/>
+                  <path class="region region--low" d="M60 110 L95 105 L105 150 L75 165 L50 140 Z"/>
+                  <path class="region region--high" d="M30 150 L70 145 L80 190 L45 200 L25 175 Z"/>
+                  <path class="region region--medium" d="M110 155 L160 145 L170 195 L130 210 L105 185 Z"/>
+                </svg>
+                <div class="legend">
+                  <span><i class="dot dot--red"></i> High risk</span>
+                  <span><i class="dot dot--orange"></i> Medium risk</span>
+                  <span><i class="dot dot--green"></i> Low risk</span>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <h3>Dropout trend</h3>
+              <div class="chart-wrap"><canvas id="chart-admin-trend"></canvas></div>
+            </div>
+            <div class="card">
+              <h3>Recent system alerts</h3>
+              <ul class="alert-list">
+                <li><span class="dot dot--red"></span> High dropout risk in 12 schools <time>1h ago</time></li>
+                <li><span class="dot dot--orange"></span> Attendance below threshold in 5 regions <time>4h ago</time></li>
+                <li><span class="dot dot--green"></span> System backup completed <time>6h ago</time></li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Quick actions</h3>
+              <div class="action-btns">
+                <button type="button" class="btn btn--purple">Generate report</button>
+                <button type="button" class="btn btn--primary">Manage users</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="auth.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
